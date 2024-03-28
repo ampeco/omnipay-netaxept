@@ -21,4 +21,9 @@ class Response extends AbstractResponse
     {
         return $this->statusCode === 200 && !isset($this->data['Error']);
     }
+
+    public function getMessage(): ?string
+    {
+        return $this->data['Error']['Message'] ?? null;
+    }
 }
