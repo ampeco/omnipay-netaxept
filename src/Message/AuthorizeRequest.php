@@ -30,7 +30,8 @@ class AuthorizeRequest extends AbstractRequest
             'amount' => $this->getAmountInteger(),
             'autoAuth' => 'true',
             'panHash' => $this->getPanHash(),
-            'recurringType' => 'S',
+            'recurringType' => 'M',
+            'recurringTransactionType' => '1',
             'description' => $this->getDescription(),
             'orderDescription' => $this->getDescription(),
         ];

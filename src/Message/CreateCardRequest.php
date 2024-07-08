@@ -31,6 +31,8 @@ class CreateCardRequest extends AbstractRequest
             'orderNumber' => $this->getTransactionId(),
             'language' => $this->getLanguage(),
             'redirectUrl' => $this->getReturnUrl(),
+            'force3DSecure' => 'true',
+            'recurringType' => 'S',
         ];
     }
 

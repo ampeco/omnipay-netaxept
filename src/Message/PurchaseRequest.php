@@ -30,7 +30,8 @@ class PurchaseRequest extends AbstractRequest
             'amount' => $this->getAmountInteger(),
             'autoSale' => 'true',
             'panHash' => $this->getPanHash(),
-            'recurringType' => 'S',
+            'recurringType' => 'M',
+            'recurringTransactionType' => '1',
             'description' => $this->getDescription(),
             'orderDescription' => $this->getDescription(),
         ];
