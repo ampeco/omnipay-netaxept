@@ -28,10 +28,10 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         $data['token'] = $this->getToken();
         $data['merchantId'] = $this->getMerchantId();
 
-        $queryParams = 'GET' === $this->getHttpMethod() ? '?'.http_build_query($data, '', '&') : '';
+        $queryParams = 'GET' === $this->getHttpMethod() ? '?' . http_build_query($data, '', '&') : '';
         $httpResponse = $this->httpClient->request(
             $this->getHttpMethod(),
-            $this->getBaseUrl().$this->getEndpoint().$queryParams,
+            $this->getBaseUrl() . $this->getEndpoint() . $queryParams,
             [],
             'GET' === $this->getHttpMethod() ? null : $data
         );
@@ -39,5 +39,8 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->createResponse($httpResponse->getBody()->getContents(), $httpResponse->getStatusCode());
     }
 
-    abstract protected function createResponse($data, int $statusCode);
+    protected function createResponse($data, int $statusCode)
+    {
+        return $this->response = new Response($this, $data, $statusCode);
+    }
 }

@@ -19,7 +19,7 @@ class Response extends AbstractResponse
 
     public function isSuccessful(): bool
     {
-        return $this->statusCode === 200 && !isset($this->data['Error']) && ($this->data['ResponseCode'] === 'OK' || isset($this->data['TransactionId']));
+        return $this->statusCode === 200 && !isset($this->data['Error']) && ((isset($this->data['ResponseCode']) && $this->data['ResponseCode'] === 'OK') || isset($this->data['TransactionId']));
     }
 
     public function getMessage(): ?string
@@ -30,18 +30,9 @@ class Response extends AbstractResponse
     public function getTransactionReference(): ?string
     {
         if ($this->isSuccessful()) {
-            return $this->data['TransactionId'];
+            return $this->data['TransactionId'] ?? null;
         }
 
         return $this->data['Error']['Result']['TransactionId'] ?? null;
-    }
-
-    public function getRedirectUrl(): string
-    {
-        $baseUrl = $this->request->getBaseUrl();
-        $merchantId = $this->request->getParameters()['merchantId'];
-        $transactionReference = $this->getTransactionReference();
-
-        return sprintf('%s/Terminal/default.aspx?merchantId=%s&transactionId=%s', $baseUrl, $merchantId, $transactionReference);
     }
 }

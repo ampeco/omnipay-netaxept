@@ -7,6 +7,7 @@ use Ampeco\OmnipayNetaxept\Message\CaptureRequest;
 use Ampeco\OmnipayNetaxept\Message\CreateCardRequest;
 use Ampeco\OmnipayNetaxept\Message\PurchaseRequest;
 use Ampeco\OmnipayNetaxept\Message\QueryRequest;
+use Ampeco\OmnipayNetaxept\Message\RefundRequest;
 use Ampeco\OmnipayNetaxept\Message\VerifyCardRequest;
 use Ampeco\OmnipayNetaxept\Message\VoidRequest;
 
@@ -44,7 +45,7 @@ class Gateway extends AbstractGateway
 
     public function refund(array $options = [])
     {
-        return $this->createRequest(VoidRequest::class, $options);
+        return $this->createRequest(RefundRequest::class, $options);
     }
 
     public function purchase(array $options = [])

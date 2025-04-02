@@ -21,9 +21,4 @@ class CaptureRequest extends AbstractRequest
             'isFinalCapture' => $this->getIsFinalCapture(),
         ];
     }
-
-    protected function createResponse($data, int $statusCode)
-    {
-        return $this->response = new Response($this, $data, $statusCode);
-    }
 }

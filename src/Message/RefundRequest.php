@@ -2,7 +2,7 @@
 
 namespace Ampeco\OmnipayNetaxept\Message;
 
-class VoidRequest extends AbstractRequest
+class RefundRequest extends AbstractRequest
 {
     public function getEndpoint(): string
     {
@@ -14,7 +14,7 @@ class VoidRequest extends AbstractRequest
         $this->validate('transactionReference');
 
         return [
-            'operation' => 'ANNUL',
+            'operation' => 'CREDIT',
             'transactionId' => $this->getTransactionReference(),
         ];
     }

@@ -26,9 +26,4 @@ class AuthorizeRequest extends AbstractRequest
             'orderDescription' => $this->getDescription(),
         ];
     }
-
-    protected function createResponse($data, int $statusCode)
-    {
-        return $this->response = new Response($this, $data, $statusCode);
-    }
 }

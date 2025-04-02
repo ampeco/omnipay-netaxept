@@ -18,9 +18,4 @@ class VerifyCardRequest extends AbstractRequest
             'transactionId' => $this->getTransactionReference(),
         ];
     }
-
-    protected function createResponse($data, int $statusCode)
-    {
-        return $this->response = new Response($this, $data, $statusCode);
-    }
 }
