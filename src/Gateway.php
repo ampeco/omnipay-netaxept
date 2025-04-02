@@ -42,6 +42,11 @@ class Gateway extends AbstractGateway
         return $this->createRequest(VoidRequest::class, $options);
     }
 
+    public function refund(array $options = [])
+    {
+        return $this->createRequest(VoidRequest::class, $options);
+    }
+
     public function purchase(array $options = [])
     {
         return $this->createRequest(PurchaseRequest::class, $options);

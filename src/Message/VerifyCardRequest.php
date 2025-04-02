@@ -21,6 +21,6 @@ class VerifyCardRequest extends AbstractRequest
 
     protected function createResponse($data, int $statusCode)
     {
-        return $this->response = new VerifyCardResponse($this, $data, $statusCode);
+        return $this->response = new Response($this, $data, $statusCode);
     }
 }

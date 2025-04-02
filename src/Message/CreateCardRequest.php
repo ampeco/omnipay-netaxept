@@ -4,16 +4,6 @@ namespace Ampeco\OmnipayNetaxept\Message;
 
 class CreateCardRequest extends AbstractRequest
 {
-    public function getLanguage(): string
-    {
-        return $this->getParameter('language');
-    }
-
-    public function setLanguage(string $language): self
-    {
-        return $this->setParameter('language', $language);
-    }
-
     public function getEndpoint(): string
     {
         return '/Netaxept/Register.aspx';

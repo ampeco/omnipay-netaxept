@@ -4,16 +4,6 @@ namespace Ampeco\OmnipayNetaxept\Message;
 
 class PurchaseRequest extends AbstractRequest
 {
-    public function getPanHash(): string
-    {
-        return $this->getParameter('panHash');
-    }
-
-    public function setPanHash(string $panHash): self
-    {
-        return $this->setParameter('panHash', $panHash);
-    }
-
     public function getEndpoint(): string
     {
         return '/Netaxept/Register.aspx';
@@ -39,6 +29,6 @@ class PurchaseRequest extends AbstractRequest
 
     protected function createResponse($data, int $statusCode)
     {
-        return $this->response = new PurchaseResponse($this, $data, $statusCode);
+        return $this->response = new Response($this, $data, $statusCode);
     }
 }

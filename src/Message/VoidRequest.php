@@ -14,13 +14,13 @@ class VoidRequest extends AbstractRequest
         $this->validate('transactionReference');
 
         return [
-            'operation' => 'ANNUL',
+            'operation' => $this->getOperationType(),
             'transactionId' => $this->getTransactionReference(),
         ];
     }
 
     protected function createResponse($data, int $statusCode)
     {
-        return $this->response = new VoidResponse($this, $data, $statusCode);
+        return $this->response = new Response($this, $data, $statusCode);
     }
 }

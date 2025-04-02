@@ -29,4 +29,44 @@ trait CommonParameters
     {
         return $this->setParameter('token', $value);
     }
+
+    public function getPanHash(): string
+    {
+        return $this->getParameter('panHash');
+    }
+
+    public function getIsFinalCapture(): bool
+    {
+        return $this->getParameter('isFinalCapture');
+    }
+
+    public function setIsFinalCapture(bool $isFinalCapture): self
+    {
+        return $this->setParameter('isFinalCapture', $isFinalCapture);
+    }
+
+    public function setPanHash(string $panHash): self
+    {
+        return $this->setParameter('panHash', $panHash);
+    }
+
+    public function getLanguage(): string
+    {
+        return $this->getParameter('language');
+    }
+
+    public function setLanguage(string $language): self
+    {
+        return $this->setParameter('language', $language);
+    }
+
+    public function getOperationType(): string
+    {
+        return $this->getParameter('operationType');
+    }
+
+    public function setOperationType($value)
+    {
+        return $this->setParameter('operationType', $value);
+    }
 }

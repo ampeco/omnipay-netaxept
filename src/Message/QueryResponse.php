@@ -9,11 +9,6 @@ class QueryResponse extends Response
         return $this->isSuccessful() ? $this->data['CardInformation']['PanHash'] : null;
     }
 
-    public function getTransactionReference(): ?string
-    {
-        return $this->isSuccessful() ? $this->data['TransactionId'] : null;
-    }
-
     public function getPaymentMethod(): object
     {
         $result = new \stdClass();
