@@ -12,14 +12,21 @@ class Response extends AbstractResponse
     public function __construct(RequestInterface $request, $data, int $statusCode)
     {
         parent::__construct($request, $data);
+
         $this->request = $request;
-        $this->data = json_decode(json_encode(simplexml_load_string($data)), true);
+
+        $validatedXml = $this->validateXml($data);
+        $this->data = $validatedXml ? json_decode(json_encode($validatedXml), true) : [];
+
         $this->statusCode = $statusCode;
     }
 
     public function isSuccessful(): bool
     {
-        return $this->statusCode === 200 && !isset($this->data['Error']) && ((isset($this->data['ResponseCode']) && $this->data['ResponseCode'] === 'OK') || isset($this->data['TransactionId']));
+        return !empty($this->data)
+            && $this->statusCode === 200
+            && !isset($this->data['Error'])
+            && ((isset($this->data['ResponseCode']) && $this->data['ResponseCode'] === 'OK') || isset($this->data['TransactionId']));
     }
 
     public function getMessage(): ?string
@@ -34,5 +41,27 @@ class Response extends AbstractResponse
         }
 
         return $this->data['Error']['Result']['TransactionId'] ?? null;
+    }
+
+    /**
+     * @param string $data
+     * @return \SimpleXMLElement|null
+     */
+    function validateXml($data): ?\SimpleXMLElement
+    {
+        if (!str_starts_with(trim($data), '<?xml')) {
+            return null;
+        }
+
+        libxml_use_internal_errors(true);
+
+        $xml = simplexml_load_string($data);
+        if ($xml === false) {
+            libxml_clear_errors();
+
+            return null;
+        }
+
+        return $xml;
     }
 }
